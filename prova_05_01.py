@@ -9,9 +9,10 @@ soma_notas = 0
 #laço for para solicitar o nome de cada aluno
 for i in range(num_alunos):
     nome = input(f"digite o nome do aluno {i+1}: ")
-
+#zerar a variavel soma_notas para as proximas medias
+    soma_notas = 0
+    
 #laço for para pedir as notas
-
     for j in range (1,4):
         nota = float(input(f"digite a nota {j}: "))
         if j == 1:
@@ -37,8 +38,7 @@ for i in range(num_alunos):
 # Acumular média na soma_médias  
     soma_medias += media
     
-#zerar a variavel soma_notas para as proximas medias
-    soma_notas = 0
+
     
 #calcular media geral
 media_geral = soma_medias / num_alunos
