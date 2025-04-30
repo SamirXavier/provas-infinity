@@ -1,4 +1,5 @@
 create database if not exists bdloja;
+
 use bdloja;
 
 create table if not exists Clientes (
