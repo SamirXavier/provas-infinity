@@ -1,8 +1,6 @@
 create database if not exists bdloja;
 use bdloja;
 
-
-
 create table if not exists Produtos(
 	ProdutoID int primary key auto_increment,
 	NomeProduto varchar(20),
@@ -16,4 +14,3 @@ insert into Produtos (NomeProduto,Quantidade,Preco) values
 ("ovo",300,29.99);
 
 SELECT * FROM bdloja.Produtos;
-
