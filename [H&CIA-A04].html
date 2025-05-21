@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[H&CIA-A04]</title>
+  <style>
+    :root {
+      --primaria: #4A90E2;
+      --secundaria: #F5A623;
+      --fundo: #F9FAFB;
+      --texto: #2C3E50;
+      --cinza-claro: #ECEFF1;
+      --hover: #357ABD;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--fundo);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primaria);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    main {
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    section {
+      flex: 2;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    aside {
+      flex: 1;
+      background: var(--cinza-claro);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    li {
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: var(--primaria);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    button {
+      background-color: var(--secundaria);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: var(--hover);
+    }
+
+    a {
+      color: var(--primaria);
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: var(--hover);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Tech Conect</h1>
+    <nav>
+      <a href="#">Início</a>
+      <a href="#">Sobre</a>
+      <a href="#">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Bem-vindo!</h2>
+      <p>Este é um exemplo de página estilizada com uma paleta de cores harmoniosa.</p>
+      <button>Clique aqui</button>
+    </section>
+
+    <aside>
+      <h3>Links úteis</h3>
+      <ul>
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">JavaScript</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tech Conect. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+
+</html>
