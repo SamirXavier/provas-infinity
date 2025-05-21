@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStay</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;    
+}
+
+
+body {
+    background-color: #121212;
+    color: #10c910;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    background-color: #1f1f1f;
+    padding: 30px;
+    width: 100%;
+    margin-bottom: 120px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #10c910;
+}
+
+button {
+    border: none;
+    background-color: #10c910;
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0a8a0a;
+}
+
+form {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+input, select, textarea, option {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #10c910;
+    background-color: #252525;
+    color: #10c910;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+a {
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.Btn-div{
+    display: flex; 
+    flex-direction: row ;
+    flex-wrap: wrap;
+    
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <h1><b>cadastro de clientes</b></h1>
+    </header>
+    <form action="\enviar" method="post">
+        <label for="Nome">Nome</label>
+        <br>
+        <input type="text" required>
+        <br><br>
+        <label for="Email">Email</label>
+        <br>
+        <input type="email" required>
+        <br><br>
+        <label for="senha">Senha</label>
+        <br>
+        <input type="password" required placeholder="********">
+        <br><br>
+        <label for="pais">Selecione seu pais</label>
+        <br>
+        <select required aria-required="true">
+            <option value="none">Selecione</option>
+            <option value="Br">Brasil</option>
+            <option value="EUA">Estados unidos</option>
+        </select>
+        <br><br>
+        <label for="Data de nascimento">Data de nascimento </label>
+        <br>
+        <input type="date" required>
+        <br><br>
+        <label for="mensagem">Mensagem</label>
+        <br>
+        <textarea name="msg" id="msg" required placeholder="escreva sua mensagem"></textarea>
+        <br><br>
+        <input type="checkbox" required>
+        <label for="termos">Li e Concordo com os termos </label> 
+        <br><br>
+        <div id="Btn-div">
+            <button type="reset">Limpar</button>
+            <button type="submit">Cadastrar</button>
+        </div>
+        
+    </form>
+
+
+</body>
+</html>
