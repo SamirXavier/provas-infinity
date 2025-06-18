@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variáveis CSS Responsivas</title>
+  <style>
+    /* 🔹 Variáveis padrão (tela pequena) */
+    :root {
+      --font-title: 20px;
+      --font-subtitle: 16px;
+      --spacing: 10px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: var(--spacing);
+      margin: 0;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: var(--spacing);
+    }
+
+    h1 {
+      font-size: var(--font-title);
+      margin-bottom: var(--spacing);
+    }
+
+    h2 {
+      font-size: var(--font-subtitle);
+      margin-bottom: var(--spacing);
+    }
+
+    section {
+      background-color: #f2f2f2;
+      padding: var(--spacing);
+      margin-top: var(--spacing);
+    }
+
+    /* 🔹 Média: Tablets */
+    @media (min-width: 600px) {
+      :root {
+        --font-title: 28px;
+        --font-subtitle: 20px;
+        --spacing: 20px;
+      }
+    }
+
+    /* 🔹 Grande: Desktop */
+    @media (min-width: 1024px) {
+      :root {
+        --font-title: 36px;
+        --font-subtitle: 24px;
+        --spacing: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bem-vindo à Página Responsiva</h1>
+    <h2>Usando Variáveis CSS</h2>
+  </header>
+
+  <section>
+    <p>Este é um exemplo de uso de variáveis CSS para tamanhos de fonte e espaçamentos. Redimensione a janela para ver os valores mudarem conforme o tamanho da tela.</p>
+  </section>
+
+</body>
+</html>
