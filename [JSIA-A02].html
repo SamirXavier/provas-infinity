@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let idade = parseInt(prompt("qual é sua idade?"));
+        let status_registro = prompt("qual o seu status de registro (registrado ou não registrado)")
+        let status = (idade >= 18) ? "maior de idade" : "menor de idade";
+        alert("você é " + status);
+
+
+        switch (status_registro){
+            case "registrado":
+                alert("Bem vindo, obrigado por se registrar")
+                break;
+            
+            
+            case "não registrado":
+                alert("Por favor, complete seu registro.");
+                break;
+
+        
+            default:
+                alert("error: Status desconhecido! ");
+                break;
+        }
+        if (idade >= 18 && status_registro === "registrado") {
+            alert("Acesso completo liberado.");
+        } 
+        else if (idade < 18 || status_registro !== "registrado") {
+            alert("Acesso limitado.");
+        }
+
+
+    </script>
+
+</body>
+</html>
