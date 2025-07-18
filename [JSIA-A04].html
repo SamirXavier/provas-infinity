@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        alert("Iniciando lista de compras");
+
+        let lista_compras = [];
+        let sair = false;
+
+        while (!sair) {
+            let menu = prompt(
+                "Selecione uma opção:\n" +
+                "1. Adicionar Item\n" +
+                "2. Remover Item\n" +
+                "3. Exibir Lista\n" +
+                "4. Editar Item\n" +
+                "0. Sair"
+            );
+
+            switch (menu) {
+                case "0":
+
+                    
+                    if (lista_compras.length === 0) {
+                        alert("A lista está vazia.");
+                    } else {
+                        let texto = "Lista de compras:<br>";
+                        lista_compras.forEach((item, i) => {
+                            texto += `${i + 1}. ${item.nome} (${item.quantidade})<br>`;
+                        });
+                        document.write(texto)
+                    }
+
+                    alert("Encerrando...");
+                    sair = true;
+                    alert("Imprimindo lista")
+                    break;
+
+                case "1":
+                    let nome = prompt("Insira o nome do item:");
+                    let quantidade = parseInt(prompt("Insira a quantidade:"));
+
+                    if (nome && !isNaN(quantidade)) {
+                        lista_compras.push({ nome, quantidade });
+                        alert(`Item adicionado: ${nome} (${quantidade})`);
+                    } else {
+                        alert("Entrada inválida.");
+                    }
+                    break;
+
+                case "2":
+                    if (lista_compras.length === 0) {
+                        alert("A lista está vazia.");
+                        break;
+                    }
+
+                    let textoRemover = "Lista atual:\n";
+                    lista_compras.forEach((item, i) => {
+                        textoRemover += `${i + 1}. ${item.nome} (${item.quantidade})\n`;
+                    });
+
+                    let indice = parseInt(prompt(textoRemover + "\nDigite o número do item para remover:"));
+
+                    if (!isNaN(indice) && indice > 0 && indice <= lista_compras.length) {
+                        let itemRemovido = lista_compras[indice - 1];
+                        let confirmacao = confirm(`Tem certeza que deseja remover: ${itemRemovido.nome} (${itemRemovido.quantidade})?`);
+                        if (confirmacao) {
+                            lista_compras.splice(indice - 1, 1);
+                            alert("Item removido com sucesso.");
+                        } else {
+                            alert("Remoção cancelada.");
+                        }
+                    } else {
+                        alert("Índice inválido.");
+                    }
+                    break;
+
+                case "3":
+                    if (lista_compras.length === 0) {
+                        alert("A lista está vazia.");
+                    } else {
+                        let texto = "Lista de compras:\n";
+                        lista_compras.forEach((item, i) => {
+                            texto += `${i + 1}. ${item.nome} (${item.quantidade})\n`;
+                        });
+                        alert(texto);
+                    }
+                    break;
+
+                case "4":
+                    if (lista_compras.length === 0) {
+                        alert("A lista está vazia.");
+                        break;
+                    }
+
+                    let textoEditar = "Lista atual:\n";
+                    lista_compras.forEach((item, i) => {
+                        textoEditar += `${i + 1}. ${item.nome} (${item.quantidade})\n`;
+                    });
+
+                    let indiceEditar = parseInt(prompt(textoEditar + "\nDigite o número do item a editar:"));
+                    if (!isNaN(indiceEditar) && indiceEditar > 0 && indiceEditar <= lista_compras.length) {
+                        let novoNome = prompt("Novo nome:");
+                        let novaQtd = parseInt(prompt("Nova quantidade:"));
+
+                        if (novoNome && !isNaN(novaQtd)) {
+                            lista_compras[indiceEditar - 1] = { nome: novoNome, quantidade: novaQtd };
+                            alert("Item atualizado com sucesso.");
+                        } else {
+                            alert("Dados inválidos.");
+                        }
+                    } else {
+                        alert("Índice inválido.");
+                    }
+                    break;
+
+                default:
+                    alert("Opção inválida.");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
