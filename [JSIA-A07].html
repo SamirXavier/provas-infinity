@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Nomes</title>
+</head>
+<body>
+  <h1>Gerenciador de Nomes</h1>
+  <p>Abra o console (F12 → Console) antes de clicar no botão.</p>
+  <button onclick="menu()">Iniciar Programa</button>
+
+  <script>
+    let nomes = []; // Array para armazenar nomes
+
+    // Função para adicionar nome
+    const adicionarNome = () => {
+      let nome = prompt("Digite o nome para adicionar:");
+      if (nome) {
+        nomes.push(nome);
+        console.log(`✅ Nome "${nome}" adicionado!`);
+        console.log("Lista atualizada:",nomes);
+      } else {
+        console.log("Nenhum nome adicionado.");
+      }
+    };
+
+    // Função para filtrar nomes que começam com letra específica
+    const filtrarNomes = () => {
+      let letra = prompt("Digite a letra inicial para filtrar nomes:");
+      if (!letra) {
+        console.log("Nenhuma letra fornecida!");
+        return;
+      }
+      let filtrados = nomes.filter(nome => nome[0].toLowerCase() === letra.toLowerCase());
+      console.log(`Nomes que começam com "${letra}":`, filtrados.length > 0 ? filtrados : "Nenhum encontrado");
+    };
+
+    // Função para buscar um nome específico
+    const buscarNome = () => {
+      let nomeBusca = prompt("Digite o nome que deseja buscar:");
+      if (!nomeBusca) {
+        console.log("Nenhum nome fornecido!");
+        return;
+      }
+      let encontrado = nomes.find(nome => nome.toLowerCase() === nomeBusca.toLowerCase());
+      if (encontrado) console.log(`🔍 Nome encontrado: ${encontrado}`);
+      else console.log("❌ Nome não encontrado.");
+    };
+
+    // Função para transformar todos os nomes em maiúsculas
+    const transformarNomes = () => {
+      let maiusculos = nomes.map(nome => nome.toUpperCase());
+      console.log("Lista transformada em maiúsculas:", maiusculos);
+    };
+
+    // Função para verificar se todos os nomes têm mais de 3 caracteres
+    const verificarNomes = () => {
+      let todosMaisQue3 = nomes.every(nome => nome.length > 3);
+      console.log("Todos os nomes têm mais de 3 caracteres?", todosMaisQue3);
+    };
+
+    // Função de callback genérica
+    function gerenciarLista(callback) {
+      callback();
+    }
+
+    // Menu principal
+    function menu() {
+      console.log("=== GERENCIADOR DE NOMES ===");
+      let opcao = "";
+      while (opcao !== "6") {
+        opcao = prompt(
+          "1 - Adicionar nome\n" +
+          "2 - Filtrar nomes por letra inicial\n" +
+          "3 - Buscar um nome específico\n" +
+          "4 - Transformar nomes em maiúsculas\n" +
+          "5 - Verificar se todos têm mais de 3 caracteres\n" +
+          "6 - Sair\n\n" +
+          "Escolha uma opção:"
+        );
+
+        switch(opcao) {
+          case "1": gerenciarLista(adicionarNome); break;
+          case "2": gerenciarLista(filtrarNomes); break;
+          case "3": gerenciarLista(buscarNome); break;
+          case "4": gerenciarLista(transformarNomes); break;
+          case "5": gerenciarLista(verificarNomes); break;
+          case "6": console.log("👋 Saindo do programa..."); break;
+          default: console.log("❌ Opção inválida! Tente novamente.");
+        }
+      }
+    }
+  </script>
+</body>
+</html>
