@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Tarefas com Callback</title>
+</head>
+<body>
+  <button onclick="menu()">Iniciar Programa</button>
+
+  <script>
+    let tarefas = [];
+
+    // Função anônima para adicionar tarefa
+    const adicionarTarefa = function() {
+      const tarefa = prompt("Digite o nome da tarefa:");
+      if (tarefa) {
+        tarefas.push(tarefa);
+        console.log(`✅ Tarefa "${tarefa}" adicionada com sucesso!`);
+      } else {
+        console.log("Nenhuma tarefa adicionada.");
+      }
+    };
+
+    // Arrow function para listar tarefas
+    const listarTarefas = () => {
+      console.log("\n=== LISTA DE TAREFAS ===");
+      if (tarefas.length === 0) console.log("Nenhuma tarefa cadastrada.");
+      else tarefas.forEach((t, i) => console.log(`${i} - ${t}`));
+    };
+
+    // Callbacks
+    const removerTarefa = () => {
+      listarTarefas();
+      const i = Number(prompt("Digite o índice da tarefa que deseja remover:"));
+      if (i >= 0 && i < tarefas.length) {
+        const removida = tarefas.splice(i, 1);
+        console.log(`🗑️ Tarefa "${removida}" removida com sucesso!`);
+      } else console.log("Índice inválido!");
+    };
+
+    const atualizarTarefa = () => {
+      listarTarefas();
+      const i = Number(prompt("Digite o índice da tarefa que deseja atualizar:"));
+      if (i >= 0 && i < tarefas.length) {
+        const nova = prompt("Digite o novo nome da tarefa:");
+        tarefas[i] = nova;
+        console.log("✏️ Tarefa atualizada com sucesso!");
+      } else console.log("Índice inválido!");
+    };
+
+    const concluirTarefa = () => {
+      listarTarefas();
+      const i = Number(prompt("Digite o índice da tarefa concluída:"));
+      if (i >= 0 && i < tarefas.length) {
+        tarefas[i] = "✅ " + tarefas[i];
+        console.log("🎉 Tarefa concluída com sucesso!");
+      } else console.log("Índice inválido!");
+    };
+
+    // Função que recebe callbacks
+    function gerenciarLista(callback) {
+      callback();
+    }
+
+    // Menu principal
+    function menu() {
+      console.log("=== GERENCIADOR DE TAREFAS ===");
+      let opcao = "";
+      while (opcao !== "6") {
+        opcao = prompt(
+          "1 - Adicionar tarefa\n" +
+          "2 - Listar tarefas\n" +
+          "3 - Remover tarefa\n" +
+          "4 - Atualizar tarefa\n" +
+          "5 - Concluir tarefa\n" +
+          "6 - Sair\n\n" +
+          "Escolha uma opção:"
+        );
+
+        switch (opcao) {
+          case "1": gerenciarLista(adicionarTarefa); break;
+          case "2": gerenciarLista(listarTarefas); break;
+          case "3": gerenciarLista(removerTarefa); break;
+          case "4": gerenciarLista(atualizarTarefa); break;
+          case "5": gerenciarLista(concluirTarefa); break;
+          case "6": console.log("👋 Saindo do programa..."); break;
+          default: console.log("❌ Opção inválida!");
+        }
+      }
+    }
+  </script>
+</body>
+</html>
