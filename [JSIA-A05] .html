@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let tarefas = [];
+
+
+        function adicionarTarefa() {
+            let tarefa = prompt("Digite o nome da tarefa:");
+            tarefas.push(tarefa);
+            alert("✅ Tarefa adicionada com sucesso!");
+        }
+
+
+        function listarTarefas() {
+            if (tarefas.length === 0) {
+                alert("Nenhuma tarefa cadastrada.");
+            } else {
+                let lista = "=== LISTA DE TAREFAS ===\n";
+                for (let i = 0; i < tarefas.length; i++) {
+                    lista += i + " - " + tarefas[i] + "\n";
+                }
+                alert(lista);
+            }
+        }
+
+
+        function removerTarefa() {
+            listarTarefas();
+            let indice = prompt("Digite o número (índice) da tarefa que deseja remover:");
+            indice = Number(indice);
+
+            if (indice >= 0 && indice < tarefas.length) {
+                tarefas.splice(indice, 1);
+                alert("🗑️ Tarefa removida com sucesso!");
+            } else {
+                alert("Índice inválido!");
+            }
+        }
+
+
+        function concluirTarefa() {
+            listarTarefas();
+            let indice = prompt("Digite o número (índice) da tarefa concluída:");
+            indice = Number(indice);
+
+            if (indice >= 0 && indice < tarefas.length) {
+                tarefas[indice] = "✅ " + tarefas[indice];
+                alert("🎉 Tarefa concluída com sucesso!");
+            } else {
+                alert("Índice inválido!");
+            }
+        }
+
+
+        function gerenciarTarefas() {
+            let opcao = "";
+
+            while (opcao !== "5") {
+                opcao = prompt(
+                    "=== GERENCIADOR DE TAREFAS ===\n" +
+                    "1 - Adicionar tarefa\n" +
+                    "2 - Listar tarefas\n" +
+                    "3 - Remover tarefa\n" +
+                    "4 - Concluir tarefa\n" +
+                    "5 - Sair\n\n" +
+                    "Escolha uma opção:"
+                );
+
+                if (opcao === "1") {
+                    adicionarTarefa();
+                } else if (opcao === "2") {
+                    listarTarefas();
+                } else if (opcao === "3") {
+                    removerTarefa();
+                } else if (opcao === "4") {
+                    concluirTarefa();
+                } else if (opcao === "5") {
+                    alert("Saindo... Até logo!");
+                } else {
+                    alert("Opção inválida! Tente novamente.");
+                }
+            }
+        }
+
+        // Inicia o programa
+        gerenciarTarefas();
+
+    </script>
+
+</body>
+
+</html>
