@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuários</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            border-color: #6C63FF;
+            outline: none;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+        }
+
+        .error-msg {
+            color: #ff5c5c;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6C63FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5848c2;
+        }
+
+        .success-msg {
+            color: #28a745;
+            font-size: 1rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cadastro de Usuários</h1>
+        <div class="form-group">
+            <input type="text" id="nome" placeholder="Nome">
+            <div class="error-msg" id="erro-nome"></div>
+        </div>
+        <div class="form-group">
+            <input type="text" id="usuario" placeholder="Usuário">
+            <div class="error-msg" id="erro-usuario"></div>
+        </div>
+        <div class="form-group">
+            <input type="password" id="senha" placeholder="Senha">
+            <div class="error-msg" id="erro-senha"></div>
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Email">
+            <div class="error-msg" id="erro-email"></div>
+        </div>
+        <div class="form-group">
+            <input type="date" id="dataNascimento" placeholder="Data de Nascimento">
+            <div class="error-msg" id="erro-data"></div>
+        </div>
+        <button id="cadastrarBtn">Cadastrar</button>
+        <div class="success-msg" id="sucesso-msg"></div>
+    </div>
+
+    <script>
+        const nomeInput = document.getElementById('nome');
+        const usuarioInput = document.getElementById('usuario');
+        const senhaInput = document.getElementById('senha');
+        const emailInput = document.getElementById('email');
+        const dataInput = document.getElementById('dataNascimento');
+        const cadastrarBtn = document.getElementById('cadastrarBtn');
+        const sucessoMsg = document.getElementById('sucesso-msg');
+
+        // Função para calcular idade
+        function calcularIdade(dataNascimento) {
+            const hoje = new Date();
+            const nascimento = new Date(dataNascimento);
+            let idade = hoje.getFullYear() - nascimento.getFullYear();
+            const m = hoje.getMonth() - nascimento.getMonth();
+            if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+            return idade;
+        }
+
+        // Limpa todas mensagens de erro
+        function limparErros() {
+            document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
+            sucessoMsg.textContent = '';
+        }
+
+        cadastrarBtn.addEventListener('click', () => {
+            limparErros();
+
+            try {
+                const nome = nomeInput.value.trim();
+                const usuario = usuarioInput.value.trim();
+                const senha = senhaInput.value.trim();
+                const email = emailInput.value.trim();
+                const dataNascimento = dataInput.value;
+
+                // Validações
+                if (!nome) throw { campo: 'nome', msg: 'O campo Nome é obrigatório.' };
+                if (!usuario) throw { campo: 'usuario', msg: 'O campo Usuário é obrigatório.' };
+                if (!senha) throw { campo: 'senha', msg: 'O campo Senha é obrigatório.' };
+                if (!email) throw { campo: 'email', msg: 'O campo Email é obrigatório.' };
+                // Validação simples de email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) throw { campo: 'email', msg: 'Formato de email inválido.' };
+                if (!dataNascimento) throw { campo: 'data', msg: 'O campo Data de Nascimento é obrigatório.' };
+
+                const idade = calcularIdade(dataNascimento);
+                if (idade < 18) throw { campo: 'data', msg: 'É necessário ter 18 anos ou mais.' };
+
+                // Cadastro bem-sucedido
+                sucessoMsg.textContent = 'Cadastro realizado com sucesso!';
+
+                // Aqui você poderia salvar os dados, ex: localStorage ou enviar para backend
+                console.log({ nome, usuario, senha, email, dataNascimento });
+
+                // Limpa campos
+                nomeInput.value = '';
+                usuarioInput.value = '';
+                senhaInput.value = '';
+                emailInput.value = '';
+                dataInput.value = '';
+
+            } catch (erro) {
+                if (erro.campo) {
+                    document.getElementById(`erro-${erro.campo}`).textContent = erro.msg;
+                } else {
+                    console.error(erro);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
