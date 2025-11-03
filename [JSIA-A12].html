@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Notas</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 50px 20px;
+        }
+
+        .container {
+            background-color: #ffffffdd;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6C63FF;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6C63FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5848c2;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #f5f5f5;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-btn {
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            padding: 8px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            width: auto;
+
+        }
+
+        .remove-btn:hover {
+            background-color: #e03e3e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gerenciador de Notas</h1>
+        <input type="text" id="tituloNota" placeholder="Digite o título da nota">
+        <button id="adicionarNota">Adicionar Nota</button>
+        <ul id="listaNotas"></ul>
+    </div>
+
+    <script>
+        const inputTitulo = document.getElementById('tituloNota');
+        const botaoAdicionar = document.getElementById('adicionarNota');
+        const listaNotas = document.getElementById('listaNotas');
+
+        function carregarNotas() {
+            listaNotas.innerHTML = '';
+            const notas = JSON.parse(localStorage.getItem('notas')) || [];
+
+            notas.forEach((nota, index) => {
+                const li = document.createElement('li');
+                li.textContent = nota.titulo;
+
+                const botaoRemover = document.createElement('button');
+                botaoRemover.textContent = 'Remover';
+                botaoRemover.classList.add('remove-btn');
+                botaoRemover.addEventListener('click', () => {
+                    removerNota(index);
+                });
+
+                li.appendChild(botaoRemover);
+                listaNotas.appendChild(li);
+            });
+        }
+
+        function adicionarNota() {
+            const titulo = inputTitulo.value.trim();
+            if (!titulo) {
+                alert('O título da nota não pode estar vazio!');
+                return;
+            }
+
+            let notas = JSON.parse(localStorage.getItem('notas')) || [];
+
+            if (notas.some(nota => nota.titulo === titulo)) {
+                alert('Já existe uma nota com esse título!');
+                return;
+            }
+
+            const novaNota = { titulo };
+            notas.push(novaNota);
+            localStorage.setItem('notas', JSON.stringify(notas));
+            inputTitulo.value = '';
+            carregarNotas();
+        }
+
+        function removerNota(index) {
+            let notas = JSON.parse(localStorage.getItem('notas')) || [];
+            notas.splice(index, 1);
+            localStorage.setItem('notas', JSON.stringify(notas));
+            carregarNotas();
+        }
+
+        botaoAdicionar.addEventListener('click', adicionarNota);
+        carregarNotas();
+    </script>
+</body>
+
+</html>
