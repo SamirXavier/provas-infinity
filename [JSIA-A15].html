@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listar Usuários da API</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 25px;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: 600px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    strong {
+      color: #111827;
+    }
+
+    .erro {
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .carregando {
+      color: #2563eb;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Usuários</h1>
+  <button id="carregar">Carregar Usuários</button>
+  <p id="mensagem"></p>
+  <ul id="lista"></ul>
+
+  <script>
+    const botao = document.getElementById('carregar');
+    const lista = document.getElementById('lista');
+    const mensagem = document.getElementById('mensagem');
+
+    botao.addEventListener('click', async () => {
+      lista.innerHTML = "";
+      mensagem.textContent = "Carregando usuários...";
+      mensagem.className = "carregando";
+
+      try {
+        const resposta = await fetch('https://jsonplaceholder.typicode.com/users');
+
+        if (!resposta.ok) {
+          throw new Error("Erro na resposta da API");
+        }
+
+        const usuarios = await resposta.json();
+
+        lista.innerHTML = ""; // limpa lista anterior
+        mensagem.textContent = ""; // remove mensagem de carregando
+
+        usuarios.forEach(usuario => {
+          const item = document.createElement('li');
+          item.innerHTML = `
+            <strong>Nome:</strong> ${usuario.name}<br>
+            <strong>Email:</strong> ${usuario.email}
+          `;
+          lista.appendChild(item);
+        });
+
+      } catch (erro) {
+        console.error(erro);
+        mensagem.textContent = "Erro ao carregar os usuários, tente novamente mais tarde.";
+        mensagem.className = "erro";
+      }
+    });
+  </script>
+
+</body>
+</html>
