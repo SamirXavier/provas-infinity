@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumindo API Pública</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    #resultado {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 500px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .usuario {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .usuario:last-child {
+      border-bottom: none;
+    }
+
+    .erro {
+      color: #dc2626;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Usuários (API Pública)</h1>
+  <button id="buscar">Buscar Dados</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    const botao = document.getElementById('buscar');
+    const resultado = document.getElementById('resultado');
+
+    botao.addEventListener('click', async () => {
+      resultado.innerHTML = "<p>Carregando dados...</p>";
+
+      try {
+        const resposta = await fetch('https://jsonplaceholder.typicode.com/users');
+        
+        if (!resposta.ok) {
+          throw new Error("Erro na resposta da API");
+        }
+
+        const dados = await resposta.json();
+
+        resultado.innerHTML = ""; // limpa o conteúdo antes de exibir novos
+
+        dados.forEach(usuario => {
+          const div = document.createElement('div');
+          div.classList.add('usuario');
+          div.innerHTML = `
+            <strong>Nome:</strong> ${usuario.name}<br>
+            <strong>Email:</strong> ${usuario.email}
+          `;
+          resultado.appendChild(div);
+        });
+
+      } catch (erro) {
+        console.error(erro);
+        resultado.innerHTML = `<p class="erro">Erro ao buscar os dados. Tente novamente mais tarde.</p>`;
+      }
+    });
+  </script>
+
+</body>
+</html>
